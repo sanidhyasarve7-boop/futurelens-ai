@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FutureLens AI – Discover Your Future Path</title>
+<style>
+/* Reset & Root */
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --primary:#6366f1;
+  --secondary:#8b5cf6;
+  --accent:#ec4899;
+  --dark:#0f172a;
+  --light:#f1f5f9;
+}
+
+/* Body & Background */
+body {
+  font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  background: linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%);
+  color: var(--light); min-height:100vh; overflow-x:hidden;
+}
+.bg-animation {
+  position: fixed; width:100%; height:100%; top:0; left:0; z-index:-1;
+  background: radial-gradient(circle at 20% 80%, rgba(99,102,241,0.1)0%,transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(139,92,246,0.1)0%,transparent 50%),
+              radial-gradient(circle at 40% 40%, rgba(236,72,153,0.05)0%,transparent 50%);
+  animation: bgMove 20s ease infinite;
+}
+@keyframes bgMove {0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(-20px,-20px) scale(1.1);}66%{transform:translate(20px,-20px) scale(0.9);}}
+.hero{text-align:center;padding:100px 20px;position:relative;}
+.hero h1{font-size:clamp(2.5rem,8vw,4.5rem);font-weight:800;background:linear-gradient(135deg,var(--primary),var(--secondary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation: glow 3s ease-in-out infinite alternate;margin-bottom:20px;}
+@keyframes glow{from{filter:drop-shadow(0 0 20px rgba(99,102,241,0.5));}to{filter:drop-shadow(0 0 40px rgba(236,72,153,0.8));}}
+.hero p{font-size:1.25rem;color:#cbd5e1;max-width:600px;margin:0 auto 40px;line-height:1.6;}
+.cta-button{background:linear-gradient(135deg,var(--primary),var(--secondary));color:white;padding:15px 40px;border:none;border-radius:50px;font-size:1.1rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;box-shadow:0 5px 20px rgba(99,102,241,0.3);}
+.cta-button:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(99,102,241,0.5);}
+.section{max-width:1200px;margin:0 auto;padding:80px 20px;}
+.section h2{font-size:2.5rem;text-align:center;margin-bottom:50px;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.about-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;margin-top:40px;}
+.about-card{background: rgba(30,41,59,0.5); backdrop-filter:blur(10px); border:1px solid rgba(99,102,241,0.2); border-radius:20px; padding:30px; transition: all 0.3s ease;}
+.about-card:hover{transform:translateY(-5px);box-shadow:0 10px 40px rgba(99,102,241,0.2); border-color:rgba(99,102,241,0.4);}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
+.feature-card{background:linear-gradient(135deg,rgba(99,102,241,0.1),rgba(139,92,246,0.1));border:1px solid rgba(99,102,241,0.2);border-radius:15px;padding:25px;text-align:center;transition:all 0.3s ease;}
+.feature-card:hover{transform:scale(1.05);box-shadow:0 8px 30px rgba(99,102,241,0.3);}
+.feature-icon{font-size:2.5rem;margin-bottom:15px;}
+.questionnaire{background: rgba(30,41,59,0.8); backdrop-filter:blur(10px); border:1px solid rgba(99,102,241,0.3); border-radius:30px; padding:50px; max-width:800px; margin:0 auto; box-shadow:0 20px 60px rgba(0,0,0,0.3);}
+.form-group{margin-bottom:30px;}
+.form-group label{display:block;font-size:1.1rem;font-weight:600;margin-bottom:10px;color:var(--light);}
+.form-group input, .form-group select{width:100%;padding:12px 20px;background:rgba(15,23,42,0.6);border:1px solid rgba(99,102,241,0.3);border-radius:10px;color:var(--light);font-size:1rem;transition:all 0.3s ease;}
+.checkbox-group{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-top:10px;}
+.checkbox-item{display:flex;align-items:center;padding:10px 15px;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.3);border-radius:10px;cursor:pointer;transition:all 0.3s ease;}
+.checkbox-item:hover{background:rgba(99,102,241,0.2);transform:translateY(-2px);}
+.checkbox-item input{width:auto;margin-right:10px;}
+.checkbox-item.selected{background:rgba(99,102,241,0.3);border-color:var(--primary);}
+.roadmap-container{max-width:1000px;margin:0 auto;padding:40px 20px;}
+.timeline{position:relative;padding:20px 0;}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--primary),var(--secondary));transform:translateX(-50%);}
+.timeline-item{position:relative;margin:40px 0;opacity:0;animation: fadeInUp 0.6s ease forwards;}
+@keyframes fadeInUp{to{opacity:1;transform:translateY(0);}}
+.timeline-item:nth-child(even){text-align:right;padding-right:50%;padding-left:40px;}
+.timeline-item:nth-child(odd){text-align:left;padding-left:50%;padding-right:40px;}
+.timeline-content{background:rgba(30,41,59,0.9);backdrop-filter:blur(10px);border:1px solid rgba(99,102,241,0.3);border-radius:20px;padding:30px;box-shadow:0 10px 40px rgba(0,0,0,0.3);transition:all 0.3s ease;}
+.timeline-content:hover{transform:scale(1.02);box-shadow:0 15px 50px rgba(99,102,241,0.3);}
+.timeline-year{position:absolute;top:20px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--primary),var(--secondary));color:white;padding:10px 20px;border-radius:20px;font-weight:700;font-size:1.2rem;box-shadow:0 5px 20px rgba(99,102,241,0.5);}
+.timeline-content h3{color:var(--accent);margin-bottom:15px;font-size:1.5rem;}
+.timeline-content ul{list-style:none;margin:15px 0;}
+.timeline-content ul li{padding:8px 0;padding-left:20px;position:relative;}
+.timeline-content ul li::before{content:'▸';position:absolute;left:0;color:var(--primary);}
+.resource-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:15px;}
+.resource-link{background:rgba(99,102,241,0.2);color:var(--light);padding:5px 15px;border-radius:20px;text-decoration:none;font-size:0.9rem;transition:all 0.3s ease;border:1px solid transparent;}
+.resource-link:hover{background:rgba(99,102,241,0.4);border-color:var(--primary);transform:translateY(-2px);}
+.steps-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;margin-top:40px;}
+.step-card{text-align:center;padding:30px;background:rgba(99,102,241,0.1);border-radius:20px;border:1px solid rgba(99,102,241,0.3);position:relative;overflow:hidden;}
+.step-card::before{content:attr(data-step);position:absolute;top:-20px;right:-20px;font-size:6rem;font-weight:800;color:rgba(99,102,241,0.1);}
+.step-card h3{font-size:1.4rem;margin-bottom:15px;color:var(--primary);}
+footer{background:rgba(15,23,42,0.9);padding:50px 20px;text-align:center;border-top:1px solid rgba(99,102,241,0.3);}
+.footer-links{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin-top:20px;}
+.footer-links a{color:var(--primary);text-decoration:none;transition:all 0.3s ease;}
+.footer-links a:hover{color:var(--accent);transform:translateY(-2px);}
+@media(max-width:768px){
+.timeline::before{left:20px;}
+.timeline-item:nth-child(even),.timeline-item:nth-child(odd){text-align:left;padding-left:60px;padding-right:20px;}
+.timeline-year{left:20px;transform:translateX(0);}
+.questionnaire{padding:30px 20px;}
+}
+.hidden{display:none;}
+.fade-in{animation:fadeIn 0.5s ease;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+</style>
+</head>
+<body>
+<div class="bg-animation"></div>
+
+<section class="hero">
+<h1>FutureLens AI – Discover Your Future Path</h1>
+<p>AI-powered platform generating personalized career roadmap based on your skills, interests, goals, and background.</p>
+<button class="cta-button" onclick="scrollToQuestionnaire()">Start Your Journey →</button>
+</section>
+
+<section class="section">
+<h2>About FutureLens AI</h2>
+<div class="about-grid">
+<div class="about-card"><h3>🤖 AI-Powered Analysis</h3><p>Analyzes your profile using AI models like Amazon Nova to simulate career trajectories.</p></div>
+<div class="about-card"><h3>📈 Multi-Year Roadmap</h3><p>Comprehensive 10-year roadmap with yearly milestones, skill recommendations, projects, and resources.</p></div>
+<div class="about-card"><h3>🎯 Personalized Guidance</h3><p>Skill gap analysis, project suggestions, competitions, and learning resources tailored to your goals.</p></div>
+</div>
+</section>
+
+<section class="section">
+<h2>Features</h2>
+<div class="features-grid">
+<div class="feature-card"><div class="feature-icon">🔮</div><h3>AI Career Simulation</h3><p>Simulate multiple career paths based on your current trajectory</p></div>
+<div class="feature-card"><div class="feature-icon">📊</div><h3>Skill Gap Analysis</h3><p>Identify missing skills and bridge the gap</p></div>
+<div class="feature-card"><div class="feature-icon">🗺️</div><h3>Personalized Learning Path</h3><p>Custom learning journey based on your style and availability</p></div>
+<div class="feature-card"><div class="feature-icon">⏳</div><h3>Future Timeline</h3><p>Visualize your career progression year by year</p></div>
+<div class="feature-card"><div class="feature-icon">📚</div><h3>Resource Library</h3><p>Curated YouTube videos, articles, and courses for each milestone</p></div>
+</div>
+</section>
+
+<section class="section" id="questionnaire-section">
+<h2>Tell Us About Yourself</h2>
+<div class="questionnaire">
+<form id="career-form">
+<div class="form-group">
+<label for="fullName">Full Name</label>
+<input type="text" id="fullName" name="fullName" required>
+</div>
+<div class="form-group">
+<label for="graduationYear">Graduation Year</label>
+<input type="number" id="graduationYear" name="graduationYear" min="2020" max="2035" required>
+</div>
+<div class="form-group">
+<label>Current Skills (Select all that apply)</label>
+<div class="checkbox-group" id="skills-group">
+<div class="checkbox-item"><input type="checkbox" id="skill1" name="skills" value="Programming"><label for="skill1">Programming</label></div>
+<div class="checkbox-item"><input type="checkbox" id="skill2" name="skills" value="AI/ML"><label for="skill2">AI/ML</label></div>
+<div class="checkbox-item"><input type="checkbox" id="skill3" name="skills" value="Data Science"><label for="skill3">Data Science</label></div>
+<div class="checkbox-item"><input type="checkbox" id="skill4" name="skills" value="Web Development"><label for="skill4">Web Development</label></div>
+<div class="checkbox-item"><input type="checkbox" id="skill5" name="skills" value="Game Development"><label for="skill5">Game Development</label></div>
+<div class="checkbox-item"><input type="checkbox" id="skill6" name="skills" value="Cybersecurity"><label for="skill6">Cybersecurity</label></div>
+<div class="checkbox-item"><input type="checkbox" id="skill7" name="skills" value="Cloud Computing"><label for="skill7">Cloud Computing</label></div>
+<div class="checkbox-item"><input type="checkbox" id="skill8" name="skills" value="Mobile Development"><label for="skill8">Mobile Development</label></div>
+</div>
+</div>
+
+<div class="form-group">
+<label>Interests (Select all that apply)</label>
+<div class="checkbox-group" id="interests-group">
+<div class="checkbox-item"><input type="checkbox" id="int1" name="interests" value="Gaming"><label for="int1">Gaming</label></div>
+<div class="checkbox-item"><input type="checkbox" id="int2" name="interests" value="Music"><label for="int2">Music</label></div>
+<div class="checkbox-item"><input type="checkbox" id="int3" name="interests" value="AI"><label for="int3">AI</label></div>
+<div class="checkbox-item"><input type="checkbox" id="int4" name="interests" value="Startups"><label for="int4">Startups</label></div>
+<div class="checkbox-item"><input type="checkbox" id="int5" name="interests" value="Entrepreneurship"><label for="int5">Entrepreneurship</label></div>
+</div>
+</div>
+<button type="submit" class="cta-button">Generate Future Path</button>
+</form>
+</div>
+</section>
+
+<section class="section roadmap-container" id="roadmap-container"></section>
+
+<footer>
+<p>Created by Sanidhya Sarve | FutureLens AI</p>
+<div class="footer-links">
+<a href="#">GitHub Repo</a>
+<a href="#">Demo Video</a>
+<a href="#">Hackathon Submission</a>
+</div>
+</footer>
+
+<script>
+function scrollToQuestionnaire(){document.getElementById('questionnaire-section').scrollIntoView({behavior:'smooth'});}
+document.getElementById('career-form').addEventListener('submit',function(e){
+e.preventDefault();
+const fullName=document.getElementById('fullName').value;
+const gradYear=parseInt(document.getElementById('graduationYear').value);
+const skills=Array.from(document.querySelectorAll('#skills-group input:checked')).map(i=>i.value);
+const interests=Array.from(document.querySelectorAll('#interests-group input:checked')).map(i=>i.value);
+if(skills.length===0||interests.length===0){alert("Select at least one skill and interest!");return;}
+const roadmapContainer=document.getElementById('roadmap-container');
+roadmapContainer.innerHTML=`<h2>Personalized Roadmap for ${fullName}</h2><div class="timeline"></div>`;
+const timeline=roadmapContainer.querySelector('.timeline');
+for(let i=0;i<10;i++){
+const year=gradYear+i;
+let milestones=[];
+if(i===0) milestones.push(`Strengthen core knowledge in ${skills.join(', ')}`);
+if(i===1) milestones.push(`Work on small projects in ${skills.join(', ')}`);
+if(i===2) milestones.push(`Join competitions or internships related to ${interests.join(', ')}`);
+if(i===3) milestones.push(`Build portfolio and network with professionals`);
+if(i===4) milestones.push(`Apply for advanced internships or research programs`);
+if(i===5) milestones.push(`Specialize in a focused area of ${interests.join(', ')}`);
+if(i===6) milestones.push(`Collaborate on larger projects or startups`);

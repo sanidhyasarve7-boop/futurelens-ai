@@ -1,13 +1,5 @@
-{
-  "functions": {
-    "api/generate.js": {
-      "memory": 128,
-      "maxDuration": 30
-    }
-  }
-}
+{}
 ```
-
-5. Scroll down → commit message:
+5. Commit message:
 ```
-Add vercel config
+Fix vercel.json
